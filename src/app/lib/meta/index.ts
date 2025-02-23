@@ -1,13 +1,15 @@
 import type { Metadata, ResolvingMetadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import type { GlobalProps } from "@/constants/global.types";
 
 export async function customMetadataGenerator(
-  parameters: GlobalProps,
-  parent: ResolvingMetadata
+  { locale, params, searchParams }: GlobalProps,
+  parent: ResolvingMetadata,
+  namespace: string
 ): Promise<Metadata> {
   // getDictionary
-
+  const t = await getTranslations({ locale, namespace });
   // return
   return {
     applicationName: "appName",
